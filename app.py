@@ -4,11 +4,13 @@ import altair as alt
 
 
 data = pd.read_csv(r"data\2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
-ny_opendata = "(https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw)"
+ny_opendata = "(https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel" \
+              "-Census-Squirrel-Data/vfnx-vebw)"
 
 st.title("Central Park Squirrel Census")
 st.markdown(
-    f"Short analysis and visualisation of [Central Park squirrels data]{ny_opendata} made to try out the Streamlit."
+    f"Short analysis and visualisation of [Central Park squirrels data]{ny_opendata} "
+    f"made to try out the Streamlit."
 )
 
 
@@ -24,9 +26,10 @@ st.write(
 """
 ### Squirrels on hectares
 """
-st.write(
-    "In our data Central Park is divided into hectare grid and numbered from '01A' to '42I' with numerical axis running north-to-south and alphabetical running east-to-west. Squirrels sightings from dataset take place only on 339 of 378 (350 'countable') of these hectares."
-)
+st.write("In our data Central Park is divided into hectare grid and numbered from '01A' "
+         "to '42I' with numerical axis running north-to-south and alphabetical running "
+         "east-to-west. Squirrels sightings from dataset take place only on 339 of 378 "
+         "(350 'countable') of these hectares.")
 
 squirrels_per_hectare = data["Hectare"].value_counts()
 max_squirrels_hec = squirrels_per_hectare.index[0]
@@ -34,7 +37,9 @@ max_squirrels_hec_nr = squirrels_per_hectare[0]
 min_squirrels_hec = squirrels_per_hectare.index[-1]
 min_squirrels_hec_nr = squirrels_per_hectare[-1]
 st.write(
-    f"Most squirrels were seen on hectare number {max_squirrels_hec} - {max_squirrels_hec_nr}. Least squirrels were on hectare {min_squirrels_hec} - {min_squirrels_hec_nr}."
+    f"Most squirrels were seen on hectare number {max_squirrels_hec} - "
+    f"{max_squirrels_hec_nr}. Least squirrels were on hectare "
+    f"{min_squirrels_hec} - {min_squirrels_hec_nr}."
 )
 
 
@@ -42,7 +47,9 @@ st.write(
 ### Time of squirrels sightings
 """
 st.write(
-    f'Squirrels were seen more in the afternoons - {len(data.loc[data["Shift"] == "PM"])} times. In the morning shifts researchers have met the squirrels {len(data.loc[data["Shift"] == "AM"])} times.'
+    f'Squirrels were seen more in the afternoons - '
+    f'{len(data.loc[data["Shift"] == "PM"])} times. In the morning shifts researchers '
+    f'have met the squirrels {len(data.loc[data["Shift"] == "AM"])} times.'
 )
 
 data["Normal Date"] = [f"{str(x)[-4:]}-{str(x)[:2]}-{str(x)[2:4]}" for x in data["Date"]]
@@ -72,7 +79,8 @@ age_chart = (
 )
 st.altair_chart(age_chart, width=-1)
 st.write(
-    "It is difficult to define squirrel age, just by looking at it. This is the reason of a lot of unknown values."
+    "It is difficult to define squirrel age, just by looking at it. "
+    "This is the reason of a lot of unknown values."
 )
 
 
@@ -145,7 +153,7 @@ foraging_data["Foraging"] = [
     "foraging" if value == 1 else "not foraging" for value in foraging_data["Foraging"]
 ]
 
-"Let's check if young squirrels are more likely to forage for food"
+st.write("Let's check if young squirrels are more likely to forage for food")
 foraging_age_chart = (
     alt.Chart(foraging_data)
     .mark_bar()
@@ -157,13 +165,18 @@ foraging_age_chart = (
     .properties(width=300, height=300)
 )
 st.altair_chart(foraging_age_chart, width=-1)
-"It's really interesting what we see in the chart above. In the observed squirrel meetings, the squirrel adults far often beg for food. The reason for this is probably that the young squirrels have not learned yet, that people can feed them and are more afraid of humans. Obviously, we don't have enough records to be sure, so let's leave that to squirrel researchers."
+st.write(
+    "It's really interesting what we see in the chart above. In the observed squirrel "
+    "meetings, the squirrel adults far often beg for food. The reason for this is "
+    "probably that the young squirrels have not learned yet, that people can feed them "
+    "and are more afraid of humans. Obviously, we don't have enough records to be sure, "
+    "so let's leave that to squirrel researchers."
+)
 
 
 """
 ### Map of squirrels
 """
-"You might need to get API token"
 # FILTERS
 filters = st.sidebar.markdown("### Map filters")
 date_selectbox = st.sidebar.selectbox(
@@ -239,6 +252,7 @@ squirrels_number_slider = st.sidebar.slider(
 )
 
 # DRAW THE MAP
+st.write("You might need to get API token")
 map_data = map_data[["X", "Y"]]
 map_data.columns = ["lon", "lat"]
 st.map(map_data, zoom=12)
