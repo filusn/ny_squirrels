@@ -6,8 +6,8 @@ data available through [New York City's open data portal][2]. The data includes 
 location, behaviour and more.
 
 
-This repository contains simple application made with [Streamlit][3]. It contains a short analysis and
-visualisations of data from Squirrel Census.
+This repository contains simple application made with [Streamlit][3]. Inside there is a short analysis and visualisation of part of the 
+NY squirrels dataset. The application was made to try out Streamlit.
  
 
 [1]: https://www.thesquirrelcensus "The Squirrel Census"
