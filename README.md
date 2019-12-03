@@ -17,6 +17,9 @@ The application was made to try out Streamlit.
 ![alt](images/app_snapshot.png)
 
 
+There is also a map showing the encounters:
+![alt](images/app_snapshot_map.png)
+
 ## Run
 * Clone the repository:
 ```bash
